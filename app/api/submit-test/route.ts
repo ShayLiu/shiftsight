@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { v4 as uuidv4 } from 'uuid';
 import { TestAnswer } from '@/types/test';
 import { determineStuckType } from '@/lib/determineStuckType';
 import { generateInitialResult } from '@/lib/generateInitialResult';
 import { getSupabaseServer, isSupabaseConfigured } from '@/lib/supabaseServer';
+
+export const runtime = 'edge';
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,9 +23,8 @@ export async function POST(request: NextRequest) {
 
     const resultType = determineStuckType(answers);
     const result = generateInitialResult(answers, optionalText);
-    const id = uuidv4();
+    const id = crypto.randomUUID();
 
-    // Try to save to Supabase if configured
     if (isSupabaseConfigured()) {
       try {
         const db = getSupabaseServer();
@@ -39,7 +39,6 @@ export async function POST(request: NextRequest) {
           });
         }
       } catch (dbError) {
-        // Log but don't fail — still return result to user
         console.error('Supabase insert error:', dbError);
       }
     }
