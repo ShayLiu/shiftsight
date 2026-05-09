@@ -1,65 +1,101 @@
-import Image from "next/image";
+import Link from 'next/link';
+import Hero from '@/components/Hero';
+import { Users, GraduationCap, Briefcase, Stethoscope, Lightbulb, Rocket, BookOpen } from 'lucide-react';
+
+const AUDIENCES = [
+  { label: '博士/博士生', icon: GraduationCap, desc: '面临学术与产业选择、毕业焦虑' },
+  { label: '高管/中层管理者', icon: Briefcase, desc: '组织政治、职业天花板、转型困惑' },
+  { label: '医生', icon: Stethoscope, desc: '高压执业、体制内外选择' },
+  { label: '咨询顾问', icon: Lightbulb, desc: '甲方依赖、独立执业路径不清' },
+  { label: '创业者', icon: Rocket, desc: '方向验证、资源有限、多重身份压力' },
+  { label: '高学历职场人', icon: BookOpen, desc: '能力与岗位错配、价值感缺失' },
+];
+
+const EXAMPLE_QUESTIONS = [
+  '工作压力大到影响健康，但不知道该不该换？',
+  '想做副业或自由职业，但不知道从哪里开始？',
+  '在组织里感觉受限，但又不敢离开？',
+  'AI 发展太快，担心自己被替代？',
+  '有很多想法，但总是无法落地执行？',
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="flex-1">
+      {/* Hero */}
+      <Hero />
+
+      {/* Audience section */}
+      <section id="audience" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <Users size={20} className="text-[#1a365d]" />
+              <span className="text-sm font-medium text-[#1a365d]">适合人群</span>
+            </div>
+            <h2 className="text-2xl font-bold text-[#1a365d]">
+              为高知高能人群设计
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {AUDIENCES.map((item) => (
+              <div
+                key={item.label}
+                className="rounded-lg border border-gray-200 p-5 hover:border-[#1a365d]/30 transition-colors"
+              >
+                <item.icon size={20} className="text-[#1a365d] mb-3" />
+                <h3 className="text-sm font-semibold text-gray-900">{item.label}</h3>
+                <p className="mt-1 text-xs text-gray-500">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Example questions / About section */}
+      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-bold text-[#1a365d]">
+              这些问题你是否也遇到过？
+            </h2>
+            <p className="mt-3 text-sm text-gray-500">
+              识变初测帮你在 3 分钟内定位核心矛盾，给出第一步行动建议。
+            </p>
+          </div>
+          <div className="space-y-4">
+            {EXAMPLE_QUESTIONS.map((q, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 rounded-lg border border-gray-200 bg-white px-5 py-4"
+              >
+                <span className="flex-shrink-0 flex h-6 w-6 items-center justify-center rounded-full bg-[#ebf4ff] text-xs font-semibold text-[#1a365d]">
+                  {i + 1}
+                </span>
+                <p className="text-sm text-gray-700">{q}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-2xl font-bold text-[#1a365d] mb-4">
+            准备好了吗？
+          </h2>
+          <p className="text-sm text-gray-500 mb-8">
+            10 道选择题，不需要注册，3 分钟看清你现在卡在哪里。
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/test"
+            className="inline-block rounded-md bg-[#1a365d] px-8 py-3 text-base font-medium text-white hover:bg-[#2a4a7f] transition-colors"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            免费开始测试
+          </Link>
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
