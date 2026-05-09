@@ -20,13 +20,13 @@ export default function TestForm() {
   const currentQuestion = TEST_QUESTIONS[currentIndex];
   const isLastQuestion = currentIndex === totalQuestions - 1;
 
-  function handleSelectOption(value: string, tags: string[]) {
+  function handleSelectOption(value: string, tags: string[], label: string) {
     setCurrentSelection(value);
-    // Store the tags for later
     const existingIndex = answers.findIndex((a) => a.questionId === currentQuestion.id);
     const newAnswer: TestAnswer = {
       questionId: currentQuestion.id,
       value,
+      label,
       tags,
     };
     if (existingIndex >= 0) {
@@ -90,7 +90,7 @@ export default function TestForm() {
               key={option.value}
               label={option.label}
               selected={currentSelection === option.value}
-              onClick={() => handleSelectOption(option.value, option.tags)}
+              onClick={() => handleSelectOption(option.value, option.tags, option.label)}
             />
           ))}
         </div>

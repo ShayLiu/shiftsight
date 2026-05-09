@@ -13,6 +13,7 @@ export interface TestQuestion {
 export interface TestAnswer {
   questionId: string;
   value: string;
+  label: string;
   tags: string[];
 }
 
@@ -36,10 +37,16 @@ export const STUCK_TYPE_LABELS: Record<StuckType, string> = {
 export interface InitialResult {
   resultType: StuckType;
   title: string;
+  identity: string;
+  summary: string;
   coreConflict: string;
-  notRecommended: string;
+  realRisk: string;
+  amplifiedFear: string;
+  keyVariables: string[];
+  notRecommended: string[];
   minimalAction: string;
-  ctaText: string;
+  sevenDayExperiment: string;
+  reflectionQuestions: string[];
 }
 
 export interface TestSession {
