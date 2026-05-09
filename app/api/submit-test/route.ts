@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { TestAnswer } from '@/types/test';
 import { determineStuckType } from '@/lib/determineStuckType';
 import { generateInitialResult } from '@/lib/generateInitialResult';
-import { supabaseServer, isSupabaseConfigured } from '@/lib/supabaseServer';
+import { getSupabaseServer, isSupabaseConfigured } from '@/lib/supabaseServer';
 
 export async function POST(request: NextRequest) {
   try {
@@ -27,14 +27,17 @@ export async function POST(request: NextRequest) {
     // Try to save to Supabase if configured
     if (isSupabaseConfigured()) {
       try {
-        await supabaseServer.from('test_sessions').insert({
-          id,
-          user_id: null,
-          answers_json: answers,
-          optional_text: optionalText,
-          result_type: resultType,
-          initial_result_json: result,
-        });
+        const db = getSupabaseServer();
+        if (db) {
+          await db.from('test_sessions').insert({
+            id,
+            user_id: null,
+            answers_json: answers,
+            optional_text: optionalText,
+            result_type: resultType,
+            initial_result_json: result,
+          });
+        }
       } catch (dbError) {
         // Log but don't fail — still return result to user
         console.error('Supabase insert error:', dbError);

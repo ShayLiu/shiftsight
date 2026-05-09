@@ -1,10 +1,20 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-
-export const supabaseServer = createClient(supabaseUrl, supabaseAnonKey);
+let _server: SupabaseClient | null = null;
 
 export function isSupabaseConfigured(): boolean {
-  return !supabaseUrl.includes('placeholder') && supabaseUrl.length > 0 && supabaseAnonKey !== 'placeholder';
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+  return url.length > 0 && !url.includes('placeholder') && key.length > 0 && key !== 'placeholder';
+}
+
+export function getSupabaseServer(): SupabaseClient | null {
+  if (!isSupabaseConfigured()) return null;
+  if (!_server) {
+    _server = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+  }
+  return _server;
 }
