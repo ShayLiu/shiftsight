@@ -6,7 +6,7 @@ export default function Hero() {
     <section className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-3xl text-center">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1a365d] leading-snug tracking-tight">
-          把模糊的不确定感，<br />转化为可判断的行动问题。
+          把模糊的不确定感，转化为可判断的行动问题。
         </h1>
 
         <div className="mt-8 mx-auto max-w-xl space-y-4">
