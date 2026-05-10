@@ -47,6 +47,23 @@ export interface InitialResult {
   minimalAction: string;
   sevenDayExperiment: string;
   reflectionQuestions: string[];
+  actionPosition: ActionPosition;
+  constraintScores: ConstraintScore[];
+}
+
+export type Quadrant = '主动探索区' | '低风险试验区' | '恢复启动区' | '先稳定再行动区';
+
+export interface ActionPosition {
+  externalConstraintScore: number;
+  actionEnergyScore: number;
+  quadrant: Quadrant;
+  explanation: string;
+}
+
+export interface ConstraintScore {
+  name: string;
+  score: number;
+  explanation: string;
 }
 
 export interface TestSession {

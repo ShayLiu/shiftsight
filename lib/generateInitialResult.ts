@@ -1,5 +1,7 @@
 import { TestAnswer, StuckType, InitialResult } from '@/types/test';
 import { determineStuckType, getSecondaryType } from './determineStuckType';
+import { calculateActionPosition } from './calculateActionPosition';
+import { calculateConstraintScores } from './calculateConstraintScores';
 
 function getIdentity(answers: TestAnswer[]): string {
   const q1 = answers.find((a) => a.questionId === 'q1');
@@ -282,5 +284,7 @@ export function generateInitialResult(answers: TestAnswer[], optionalText: strin
     minimalAction: template.minimalAction(identity),
     sevenDayExperiment: template.sevenDayExperiment(identity, resource),
     reflectionQuestions: template.reflectionQuestions,
+    actionPosition: calculateActionPosition(answers),
+    constraintScores: calculateConstraintScores(answers),
   };
 }
