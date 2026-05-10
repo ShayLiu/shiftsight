@@ -6,10 +6,10 @@ export default function Hero() {
     <section className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl text-center">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1a365d] leading-tight tracking-tight">
-          遇到复杂问题，先别急着做决定。
+          识变
         </h1>
-        <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-          10 道选择题，不需要注册，3 分钟看清你现在卡在哪里。
+        <p className="mt-6 text-base text-gray-500 max-w-md mx-auto">
+          3 分钟，看清你卡在哪里。
         </p>
         <div className="mt-10">
           <Link
