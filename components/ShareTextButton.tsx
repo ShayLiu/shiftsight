@@ -28,9 +28,9 @@ ${result.minimalAction}
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-2 rounded-md border border-gray-200 bg-white px-5 py-2.5 text-sm text-gray-600 hover:border-[#1a365d] hover:text-[#1a365d] transition-colors"
+      className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-[#1a365d] transition-colors"
     >
-      {copied ? <Check size={16} className="text-green-500" /> : <Copy size={16} />}
+      {copied ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
       {copied ? '已复制' : '复制分享文案'}
     </button>
   );

@@ -1,52 +1,56 @@
 import { InitialResult } from '@/types/test';
 
+function truncate(text: string, max: number) {
+  return text.length > max ? text.slice(0, max) + '…' : text;
+}
+
+function firstItem(items: string[]): string {
+  return items[0] || '';
+}
+
 export default function ShareResultCard({ result }: { result: InitialResult }) {
   return (
-    <div className="mx-auto max-w-sm sm:max-w-md">
-      <div
-        className="rounded-2xl border border-gray-200 bg-gradient-to-b from-[#f8f9fb] to-white p-6 sm:p-8 shadow-sm"
-        style={{ aspectRatio: '4/5' }}
-      >
+    <div className="mx-auto w-full max-w-[390px]">
+      <div className="rounded-3xl border border-slate-200 bg-[#F8F5EF] p-6 shadow-sm">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <span className="text-xs font-medium text-[#1a365d] tracking-wider">识变 ShiftSight</span>
-          <span className="text-xs text-gray-400">初测结果</span>
+        <div className="flex items-center justify-between mb-5">
+          <span className="text-xs font-semibold text-[#1a365d] tracking-wide">识变 ShiftSight</span>
+          <span className="rounded-full bg-[#1a365d]/10 px-2.5 py-0.5 text-[10px] font-medium text-[#1a365d]">初步诊断</span>
         </div>
 
-        <div className="h-px bg-gray-200 mb-6" />
-
         {/* Result Type */}
-        <div className="mb-6">
-          <p className="text-xs text-gray-400 mb-2">我的识变初测结果</p>
-          <span className="inline-block rounded-md bg-[#1a365d] px-3 py-1.5 text-sm font-semibold text-white">
+        <div className="mb-5">
+          <span className="inline-block rounded-lg bg-[#1a365d] px-4 py-2 text-base font-bold text-white">
             {result.title}
           </span>
         </div>
 
+        <div className="h-px bg-slate-300/50 mb-5" />
+
         {/* Core Conflict */}
-        <div className="mb-5">
-          <p className="text-xs font-medium text-[#1a365d] mb-1.5">核心冲突</p>
-          <p className="text-xs text-gray-600 leading-relaxed line-clamp-4">{result.coreConflict}</p>
+        <div className="mb-4">
+          <p className="text-[10px] font-semibold text-[#1a365d] uppercase tracking-wider mb-1">核心冲突</p>
+          <p className="text-xs text-slate-700 leading-relaxed">{truncate(result.coreConflict, 80)}</p>
         </div>
 
         {/* Not Recommended */}
-        <div className="mb-5">
-          <p className="text-xs font-medium text-[#c8952e] mb-1.5">当前不建议</p>
-          <p className="text-xs text-gray-600 leading-relaxed line-clamp-3">{result.notRecommended[0]}</p>
+        <div className="mb-4">
+          <p className="text-[10px] font-semibold text-[#c8952e] uppercase tracking-wider mb-1">当前不建议</p>
+          <p className="text-xs text-slate-700 leading-relaxed">{truncate(firstItem(result.notRecommended), 60)}</p>
         </div>
 
-        {/* Minimal Action */}
-        <div className="mb-6">
-          <p className="text-xs font-medium text-[#1a365d] mb-1.5">24 小时行动</p>
-          <p className="text-xs text-gray-600 leading-relaxed line-clamp-3">{result.minimalAction}</p>
+        {/* Action */}
+        <div className="mb-5">
+          <p className="text-[10px] font-semibold text-[#1a365d] uppercase tracking-wider mb-1">24 小时行动</p>
+          <p className="text-xs text-slate-700 leading-relaxed">{truncate(result.minimalAction, 70)}</p>
         </div>
+
+        <div className="h-px bg-slate-300/50 mb-4" />
 
         {/* Footer */}
-        <div className="h-px bg-gray-200 mb-4" />
-        <div className="text-center">
-          <p className="text-xs text-gray-400">识变初测｜3 分钟识别当前行动卡点</p>
-          <p className="text-xs text-gray-300 mt-1">适合博士 / 医生 / 高管 / 专业人士</p>
-        </div>
+        <p className="text-center text-[10px] text-slate-400">
+          识变初测｜3 分钟识别当前行动卡点
+        </p>
       </div>
     </div>
   );
