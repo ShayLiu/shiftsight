@@ -7,7 +7,7 @@ export default function TestPage() {
         <div className="text-center mb-10">
           <h1 className="text-2xl font-bold text-[#1a365d]">识变初测</h1>
           <p className="mt-3 text-sm text-gray-500">
-            3 分钟看清你当前最主要的职业与行动困境。
+            3 分钟看清您当前最主要的职业与行动困境。
           </p>
         </div>
         <TestForm />

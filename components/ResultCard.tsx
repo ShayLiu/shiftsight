@@ -35,7 +35,7 @@ export default function ResultCard({ result }: { result: InitialResult }) {
       </div>
 
       {/* Key Variables */}
-      <Section icon={GitBranch} title="影响你结果的关键变量" color="blue">
+      <Section icon={GitBranch} title="影响您结果的关键变量" color="blue">
         <ul className="space-y-2">
           {result.keyVariables.map((v, i) => (
             <li key={i} className="flex items-start gap-2.5 text-sm text-gray-700">
@@ -85,7 +85,7 @@ export default function ResultCard({ result }: { result: InitialResult }) {
       {/* Disclaimer */}
       <div className="rounded-lg bg-gray-50 border border-gray-200 p-5 text-center">
         <p className="text-xs text-gray-400 leading-relaxed">
-          本结果基于你的选择自动生成，仅供自我梳理参考。不替代专业咨询、心理治疗或医疗建议。
+          本结果基于您的选择自动生成，仅供自我梳理参考。不替代专业咨询、心理治疗或医疗建议。
           每一个建议都强调低风险验证，而非冲动决策。
         </p>
       </div>

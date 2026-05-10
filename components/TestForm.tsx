@@ -97,7 +97,7 @@ export default function TestForm() {
           <>
             <div className="mt-8">
               <label className="block text-sm font-medium text-gray-700 mb-2">还有什么想补充的？（选填）</label>
-              <textarea value={optionalText} onChange={(e) => setOptionalText(e.target.value)} placeholder="如果你觉得以上选项没有完全覆盖你的情况，可以在这里简要描述..." className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 focus:border-[#1a365d] focus:outline-none focus:ring-1 focus:ring-[#1a365d] min-h-[100px] resize-y" />
+              <textarea value={optionalText} onChange={(e) => setOptionalText(e.target.value)} placeholder="如果您觉得以上选项没有完全覆盖您的情况，可以在这里简要描述..." className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-700 placeholder-gray-400 focus:border-[#1a365d] focus:outline-none focus:ring-1 focus:ring-[#1a365d] min-h-[100px] resize-y" />
             </div>
             {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
             <div className="mt-8 flex justify-end">

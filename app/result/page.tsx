@@ -77,7 +77,7 @@ function ResultContent() {
     <div className="mx-auto max-w-2xl">
       {/* 1. Status */}
       <div className="text-center mb-3">
-        <p className="text-xs text-gray-400 mb-3">你的当前行动状态</p>
+        <p className="text-xs text-gray-400 mb-3">您的当前行动状态</p>
         <span className="inline-block rounded-full bg-[#ebf4ff] px-5 py-2 text-base font-bold text-[#1a365d]">{result.title}</span>
       </div>
       <div className="rounded-xl border border-[#1a365d]/15 bg-[#1a365d]/5 p-5 mb-10">
@@ -131,7 +131,7 @@ function ResultContent() {
       {/* 6. Share Card */}
       <div className="mt-14">
         <div className="h-px bg-gray-200 mb-8" />
-        <p className="text-center text-xs text-gray-400 mb-6">识变结果卡 · 已隐藏你的具体输入</p>
+        <p className="text-center text-xs text-gray-400 mb-6">识变结果卡 · 已隐藏您的具体输入</p>
         <ShareResultCard result={result} />
         <div className="mt-5 flex flex-col items-center gap-3">
           <SaveImageButton targetId="share-card" />

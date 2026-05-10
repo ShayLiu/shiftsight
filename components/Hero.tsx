@@ -14,7 +14,7 @@ export default function Hero() {
         </h1>
 
         <p className="mt-8 text-sm text-gray-500 leading-relaxed max-w-lg mx-auto">
-          识变 ShiftSight 通过 10 个结构化问题，帮助你梳理职业、收入、组织、AI 变化、价值外化与行动能量之间的关系，把模糊的不确定转化为一个更稳妥的低风险行动。
+          识变 ShiftSight 通过 10 个结构化问题，帮助您梳理职业、收入、组织、AI 变化、价值外化与行动能量之间的关系，把模糊的不确定转化为一个更稳妥的低风险行动。
         </p>
 
         <div className="mt-6 flex flex-wrap justify-center gap-2">

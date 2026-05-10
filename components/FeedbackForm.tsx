@@ -56,7 +56,7 @@ export default function FeedbackForm({ testSessionId, resultType }: { testSessio
     return (
       <div className="rounded-xl border border-gray-200 bg-white p-8 text-center">
         <Check size={20} className="text-emerald-500 mx-auto mb-2" />
-        <p className="text-sm text-[#1a365d]">已收到，谢谢你帮我校准第一版。</p>
+        <p className="text-sm text-[#1a365d]">已收到，感谢您的反馈。</p>
       </div>
     );
   }
@@ -64,28 +64,28 @@ export default function FeedbackForm({ testSessionId, resultType }: { testSessio
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-6">
       <h3 className="text-sm font-semibold text-[#1a365d]">意见反馈</h3>
-      <p className="text-xs text-gray-400 mt-1 mb-6">你的反馈将用于改进后续版本。</p>
+      <p className="text-xs text-gray-400 mt-1 mb-6">您的反馈将用于改进后续版本。</p>
 
       <div className="space-y-5">
         <div>
-          <p className="text-xs font-medium text-gray-700 mb-2">这个结果和你当前状态匹配吗？<span className="text-red-400">*</span></p>
+          <p className="text-xs font-medium text-gray-700 mb-2">这个结果和您当前状态匹配吗？<span className="text-red-400">*</span></p>
           <Chips options={ACCURACY} selected={accuracy} onSelect={setAccuracy} />
         </div>
 
         <div>
-          <p className="text-xs font-medium text-gray-700 mb-2">你最想获得哪类下一步建议？</p>
+          <p className="text-xs font-medium text-gray-700 mb-2">您最想获得哪类下一步建议？</p>
           <Chips options={ADVICE} selected={advice} onSelect={setAdvice} />
         </div>
 
         <div>
           <p className="text-xs font-medium text-gray-700 mb-2">哪里没有说准？<span className="text-gray-400 font-normal">（选填）</span></p>
           <textarea value={mismatch} onChange={(e) => setMismatch(e.target.value)}
-            placeholder="可以简单写几句：哪里不像你、哪里太模糊、你真正卡住的点是什么。"
+            placeholder="可以简单写几句：哪里不像您、哪里太模糊、您真正卡住的点是什么。"
             className="w-full rounded-lg border border-gray-200 px-3 py-2 text-xs text-gray-700 placeholder-gray-400 focus:border-[#1a365d] focus:outline-none focus:ring-1 focus:ring-[#1a365d] min-h-[60px] resize-y" />
         </div>
 
         <div>
-          <p className="text-xs font-medium text-gray-700 mb-2">如果开放完整行动咨询内测，你愿意体验吗？</p>
+          <p className="text-xs font-medium text-gray-700 mb-2">如果开放完整行动咨询内测，您愿意体验吗？</p>
           <Chips options={WILLINGNESS} selected={willingness} onSelect={setWillingness} />
         </div>
 

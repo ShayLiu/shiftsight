@@ -33,7 +33,7 @@ export default function Home() {
       <section id="about" className="py-14 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-lg font-semibold text-[#1a365d] text-center mb-8">
-            这些问题你是否也遇到过？
+            这些问题您是否也遇到过？
           </h2>
           <div className="space-y-3">
             {EXAMPLE_QUESTIONS.map((q, i) => (
