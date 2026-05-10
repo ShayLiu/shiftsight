@@ -8,6 +8,7 @@ import ActionDashboard from '@/components/ActionDashboard';
 import TopConstraintList from '@/components/TopConstraintList';
 import ShareResultCard from '@/components/ShareResultCard';
 import ShareTextButton from '@/components/ShareTextButton';
+import SaveImageButton from '@/components/SaveImageButton';
 import { AlertTriangle, Zap, Target } from 'lucide-react';
 
 function ResultContent() {
@@ -98,9 +99,9 @@ function ResultContent() {
         <div className="h-px bg-gray-200 mb-8" />
         <p className="text-center text-xs text-gray-400 mb-6">识变结果卡 · 已隐藏你的具体输入</p>
         <ShareResultCard result={result} />
-        <div className="mt-4 flex flex-col items-center gap-2">
+        <div className="mt-5 flex flex-col items-center gap-3">
+          <SaveImageButton targetId="share-card" />
           <ShareTextButton result={result} />
-          <p className="text-[10px] text-gray-300">可直接截图保存这张卡片</p>
         </div>
       </div>
 

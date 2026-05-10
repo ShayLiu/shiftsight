@@ -27,7 +27,7 @@ export default function ShareResultCard({ result }: { result: InitialResult }) {
   ];
 
   return (
-    <div className="mx-auto w-full max-w-[390px]">
+    <div className="mx-auto w-full max-w-[390px]" id="share-card">
       <div className="rounded-3xl border border-slate-200 bg-[#F8F5EF] px-6 py-7 shadow-sm">
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
