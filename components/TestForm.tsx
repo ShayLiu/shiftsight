@@ -50,28 +50,27 @@ export default function TestForm() {
       const constraintScores = calculateConstraintScores(answers);
       const id = Math.random().toString(36).substring(2) + Date.now().toString(36);
 
-      // Save to Supabase if configured
-      const db = getSupabase();
-      if (db) {
-        try {
-          await db.from('test_sessions').insert({
-            id,
-            user_id: null,
-            answers_json: answers,
-            optional_text: optionalText,
-            result_type: result.resultType,
-            initial_result_json: result,
-            dashboard_scores_json: dashboardScores,
-            constraint_scores_json: constraintScores,
-          });
-        } catch { /* still continue */ }
-      }
-
       sessionStorage.setItem(`test-result-${id}`, JSON.stringify({
         ...result,
         dashboardScores,
         constraintScores,
       }));
+
+      // Save to Supabase in background, don't block redirect
+      const db = getSupabase();
+      if (db) {
+        db.from('test_sessions').insert({
+          id,
+          user_id: null,
+          answers_json: answers,
+          optional_text: optionalText,
+          result_type: result.resultType,
+          initial_result_json: result,
+          dashboard_scores_json: dashboardScores,
+          constraint_scores_json: constraintScores,
+        }).then(() => {}, () => {});
+      }
+
       router.push(`/result?id=${id}`);
     } catch {
       setError('提交失败，请重试。');
