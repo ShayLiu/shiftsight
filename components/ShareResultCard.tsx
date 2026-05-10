@@ -71,7 +71,7 @@ export default function ShareResultCard({ result }: { result: InitialResult }) {
         </div>
 
         <div className="h-px bg-slate-300/40 mb-3" />
-        <p className="text-center text-[10px] text-slate-400">识变初测｜3 分钟识别当前行动制约点</p>
+        <p className="text-center text-[10px] text-slate-400">看清处境，找到下一步</p>
       </div>
     </div>
   );

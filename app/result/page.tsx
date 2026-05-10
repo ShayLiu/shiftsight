@@ -45,7 +45,7 @@ function ResultContent() {
     <div className="mx-auto max-w-2xl">
       {/* 1. Status Card */}
       <div className="text-center mb-3">
-        <p className="text-xs text-gray-400 mb-3">你的初步诊断</p>
+        <p className="text-xs text-gray-400 mb-3">你的当前行动状态</p>
         <span className="inline-block rounded-full bg-[#ebf4ff] px-5 py-2 text-base font-bold text-[#1a365d]">
           {result.title}
         </span>

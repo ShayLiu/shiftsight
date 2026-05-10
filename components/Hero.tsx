@@ -7,12 +7,14 @@ export default function Hero() {
   return (
     <section className="pt-20 pb-10 sm:pt-28 sm:pb-14 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-2xl text-center">
+        <p className="text-xs text-gray-400 tracking-widest mb-6">在不确定中，看清下一步的秩序。</p>
+
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1a365d] leading-snug tracking-tight">
-          把模糊的不确定感，<br className="sm:hidden" />转化为可判断的行动问题。
+          面对复杂选择，先把处境看清。
         </h1>
 
-        <p className="mt-8 text-sm text-gray-500 leading-relaxed">
-          识变初测通过结构化选择，帮助你区分当前困境的类型，并给出初步行动建议。
+        <p className="mt-8 text-sm text-gray-500 leading-relaxed max-w-lg mx-auto">
+          识变 ShiftSight 通过 10 个结构化问题，帮助你梳理职业、收入、组织、AI 变化、价值外化与行动能量之间的关系，把模糊的不确定转化为一个更稳妥的低风险行动。
         </p>
 
         <div className="mt-6 flex flex-wrap justify-center gap-2">
