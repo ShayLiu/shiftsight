@@ -5,18 +5,19 @@ export default function Hero() {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl text-center">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1a365d] leading-tight tracking-tight">
-          识变
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1a365d] leading-tight tracking-tight">
+          把模糊的不确定感，<br className="hidden sm:inline" />转化为可判断的行动问题。
         </h1>
-        <p className="mt-6 text-base text-gray-500 max-w-md mx-auto">
-          3 分钟，看清你卡在哪里。
+        <p className="mt-6 text-sm sm:text-base text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          识变初测通过结构化选择，帮助你区分自己当前更接近职业方向不清、组织受限、收入焦虑、价值未外化、AI 冲击、心理能量不足，还是行动启动困难，并给出初步行动建议。
         </p>
-        <div className="mt-10">
+        <p className="mt-3 text-xs text-gray-400">10 个问题，约 3 分钟完成。</p>
+        <div className="mt-8">
           <Link
             href="/test"
-            className="inline-block rounded-md bg-[#1a365d] px-8 py-3 text-base font-medium text-white hover:bg-[#2a4a7f] transition-colors"
+            className="inline-block rounded-md bg-[#1a365d] px-8 py-3 text-sm font-medium text-white hover:bg-[#2a4a7f] transition-colors"
           >
-            免费开始测试
+            进行初步诊断
           </Link>
         </div>
       </div>
