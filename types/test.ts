@@ -49,6 +49,7 @@ export interface InitialResult {
   reflectionQuestions: string[];
   actionPosition: ActionPosition;
   constraintScores: ConstraintScore[];
+  dashboardScores: DashboardScores;
 }
 
 export type Quadrant = '主动探索区' | '低风险试验区' | '恢复启动区' | '先稳定再行动区';
@@ -58,6 +59,12 @@ export interface ActionPosition {
   actionEnergyScore: number;
   quadrant: Quadrant;
   explanation: string;
+}
+
+export interface DashboardScores {
+  constraintIntensity: number;
+  actionEnergy: number;
+  valueExternalization: number;
 }
 
 export interface ConstraintScore {

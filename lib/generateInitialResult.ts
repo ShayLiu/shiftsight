@@ -2,6 +2,7 @@ import { TestAnswer, StuckType, InitialResult } from '@/types/test';
 import { determineStuckType, getSecondaryType } from './determineStuckType';
 import { calculateActionPosition } from './calculateActionPosition';
 import { calculateConstraintScores } from './calculateConstraintScores';
+import { calculateDashboardScores } from './calculateDashboardScores';
 
 function getIdentity(answers: TestAnswer[]): string {
   const q1 = answers.find((a) => a.questionId === 'q1');
@@ -286,5 +287,6 @@ export function generateInitialResult(answers: TestAnswer[], optionalText: strin
     reflectionQuestions: template.reflectionQuestions,
     actionPosition: calculateActionPosition(answers),
     constraintScores: calculateConstraintScores(answers),
+    dashboardScores: calculateDashboardScores(answers),
   };
 }

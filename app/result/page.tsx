@@ -4,12 +4,11 @@ import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { InitialResult } from '@/types/test';
-import ActionCoordinateMap from '@/components/ActionCoordinateMap';
+import ActionDashboard from '@/components/ActionDashboard';
 import TopConstraintList from '@/components/TopConstraintList';
-import ResultCard from '@/components/ResultCard';
 import ShareResultCard from '@/components/ShareResultCard';
 import ShareTextButton from '@/components/ShareTextButton';
-import { AlertTriangle, Zap } from 'lucide-react';
+import { AlertTriangle, Zap, Target } from 'lucide-react';
 
 function ResultContent() {
   const searchParams = useSearchParams();
@@ -28,7 +27,7 @@ function ResultContent() {
   }, [id]);
 
   if (loading) {
-    return <div className="mx-auto max-w-2xl text-center py-20"><p className="text-sm text-gray-500">正在加载结果...</p></div>;
+    return <div className="mx-auto max-w-2xl text-center py-20"><p className="text-sm text-gray-500">正在加载...</p></div>;
   }
 
   if (!result) {
@@ -43,18 +42,24 @@ function ResultContent() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      {/* 1. Header */}
-      <div className="text-center mb-10">
-        <p className="text-xs text-gray-400 mb-3">你的初步判断</p>
+      {/* 1. Status Card */}
+      <div className="text-center mb-3">
+        <p className="text-xs text-gray-400 mb-3">你的初步诊断</p>
         <span className="inline-block rounded-full bg-[#ebf4ff] px-5 py-2 text-base font-bold text-[#1a365d]">
           {result.title}
         </span>
       </div>
+      <div className="rounded-xl border border-[#1a365d]/15 bg-[#1a365d]/5 p-5 mb-10">
+        <div className="flex items-start gap-2">
+          <Target size={16} className="text-[#1a365d] shrink-0 mt-0.5" />
+          <p className="text-sm text-slate-700 leading-relaxed">{result.coreConflict}</p>
+        </div>
+      </div>
 
-      {/* 2. Action Coordinate Map */}
-      <div className="mb-12">
-        <h2 className="text-sm font-semibold text-[#1a365d] mb-6 text-center">行动坐标</h2>
-        <ActionCoordinateMap position={result.actionPosition} />
+      {/* 2. Dashboard */}
+      <div className="rounded-xl border border-gray-200 bg-white p-6 mb-8">
+        <h2 className="text-sm font-semibold text-[#1a365d] mb-5">行动制约仪表盘</h2>
+        <ActionDashboard scores={result.dashboardScores} />
       </div>
 
       {/* 3. Top 3 Constraints */}
@@ -90,7 +95,7 @@ function ResultContent() {
 
       {/* 6. Share Card */}
       <div className="mt-14">
-        <div className="h-px bg-gray-200 mb-10" />
+        <div className="h-px bg-gray-200 mb-8" />
         <p className="text-center text-xs text-gray-400 mb-6">识变结果卡 · 已隐藏你的具体输入</p>
         <ShareResultCard result={result} />
         <div className="mt-4 flex flex-col items-center gap-2">
@@ -99,7 +104,6 @@ function ResultContent() {
         </div>
       </div>
 
-      {/* Bottom */}
       <div className="mt-10 text-center">
         <Link href="/test" className="inline-block rounded-md border border-gray-300 px-6 py-3 text-sm font-medium text-gray-600 hover:border-[#1a365d] hover:text-[#1a365d] transition-colors">
           重新测试
