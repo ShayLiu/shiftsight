@@ -56,10 +56,10 @@ export default function TestForm() {
         constraintScores,
       }));
 
-      // Save to Supabase in background, don't block redirect
+      // Save to Supabase
       const db = getSupabase();
       if (db) {
-        db.from('test_sessions').insert({
+        const { error: dbErr } = await db.from('test_sessions').insert({
           user_id: null,
           answers_json: answers,
           optional_text: optionalText,
@@ -67,7 +67,12 @@ export default function TestForm() {
           initial_result_json: result,
           dashboard_scores_json: dashboardScores,
           constraint_scores_json: constraintScores,
-        }).then(() => {}, () => {});
+        });
+        if (dbErr) {
+          alert('Supabase error: ' + dbErr.message);
+        }
+      } else {
+        alert('Supabase not connected');
       }
 
       router.push(`/result?id=${id}`);
