@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { TEST_QUESTIONS } from '@/lib/testQuestions';
 import { TestAnswer } from '@/types/test';
+import { generateInitialResult } from '@/lib/generateInitialResult';
 import OptionCard from './OptionCard';
 import ProgressBar from './ProgressBar';
 import { Loader2 } from 'lucide-react';
@@ -41,38 +42,19 @@ export default function TestForm() {
   function handleNext() {
     if (!currentSelection) return;
     setCurrentIndex(currentIndex + 1);
-    // Restore previous selection if user goes forward and comes back (not needed in one-way flow)
     const nextAnswer = answers.find((a) => a.questionId === TEST_QUESTIONS[currentIndex + 1]?.id);
     setCurrentSelection(nextAnswer?.value || null);
   }
 
-  async function handleSubmit() {
+  function handleSubmit() {
     if (!currentSelection && !isLastQuestion) return;
     setSubmitting(true);
 
-    try {
-      const response = await fetch('/api/submit-test', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ answers, optionalText }),
-      });
+    const result = generateInitialResult(answers, optionalText);
+    const id = crypto.randomUUID();
 
-      if (!response.ok) {
-        throw new Error('提交失败，请重试');
-      }
-
-      const data = await response.json();
-      const { id, result } = data;
-
-      // Store result in sessionStorage for the result page
-      sessionStorage.setItem(`test-result-${id}`, JSON.stringify(result));
-
-      router.push(`/test/result/${id}`);
-    } catch (error) {
-      console.error(error);
-      setSubmitting(false);
-      alert('提交失败，请检查网络后重试。');
-    }
+    sessionStorage.setItem(`test-result-${id}`, JSON.stringify(result));
+    router.push(`/result?id=${id}`);
   }
 
   return (
@@ -95,7 +77,6 @@ export default function TestForm() {
           ))}
         </div>
 
-        {/* Optional text on last question */}
         {isLastQuestion && (
           <div className="mt-8">
             <label className="block text-sm font-medium text-gray-700 mb-2">
