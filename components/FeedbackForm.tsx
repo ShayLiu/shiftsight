@@ -20,19 +20,20 @@ export default function FeedbackForm({ testSessionId, resultType }: { testSessio
     setStatus('submitting');
 
     try {
-      await fetch('/api/submit-feedback', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          testSessionId,
-          resultType,
-          accuracyRating: accuracy,
-          desiredAdvice: advice,
-          mismatchText: mismatch,
-          willingness,
-          contact,
-        }),
-      });
+      const { getSupabase } = await import('@/lib/supabaseClient');
+      const db = getSupabase();
+      if (db) {
+        await db.from('feedback_entries').insert({
+          test_session_id: testSessionId || null,
+          result_type: resultType || null,
+          accuracy_rating: accuracy,
+          desired_advice: advice || null,
+          mismatch_text: mismatch || null,
+          willingness: willingness || null,
+          contact: contact || null,
+          source: 'result_page',
+        });
+      }
       setStatus('done');
     } catch {
       setStatus('idle');
