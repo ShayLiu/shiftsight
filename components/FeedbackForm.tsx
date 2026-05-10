@@ -36,7 +36,7 @@ export default function FeedbackForm({ testSessionId, resultType }: { testSessio
       const db = getSupabase();
       if (db) {
         await db.from('feedback_entries').insert({
-          test_session_id: testSessionId || null,
+          test_session_id: null,
           result_type: resultType || null,
           accuracy_rating: accuracy,
           desired_advice: advice || null,
