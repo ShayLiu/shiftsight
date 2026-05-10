@@ -63,8 +63,8 @@ export default function FeedbackForm({ testSessionId, resultType }: { testSessio
 
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-6">
-      <h3 className="text-sm font-semibold text-[#1a365d]">帮我校准这个结果</h3>
-      <p className="text-xs text-gray-400 mt-1 mb-6">这个测试还在第一版。你的反馈会帮助我改进判断，也让后续建议更具体。</p>
+      <h3 className="text-sm font-semibold text-[#1a365d]">结果校准</h3>
+      <p className="text-xs text-gray-400 mt-1 mb-6">你的反馈将用于改进后续版本。</p>
 
       <div className="space-y-5">
         <div>
