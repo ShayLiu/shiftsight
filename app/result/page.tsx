@@ -3,28 +3,60 @@
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { InitialResult } from '@/types/test';
+import { InitialResult, DashboardScores, ConstraintScore } from '@/types/test';
 import ActionDashboard from '@/components/ActionDashboard';
 import TopConstraintList from '@/components/TopConstraintList';
 import ShareResultCard from '@/components/ShareResultCard';
 import ShareTextButton from '@/components/ShareTextButton';
 import SaveImageButton from '@/components/SaveImageButton';
+import FeedbackForm from '@/components/FeedbackForm';
 import { AlertTriangle, Zap, Target } from 'lucide-react';
+
+interface FullResult extends InitialResult {
+  dashboardScores: DashboardScores;
+  constraintScores: ConstraintScore[];
+}
 
 function ResultContent() {
   const searchParams = useSearchParams();
-  const id = searchParams.get('id');
-  const [result, setResult] = useState<InitialResult | null>(null);
+  const id = searchParams.get('id') || '';
+  const [result, setResult] = useState<FullResult | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (id) {
-      const stored = sessionStorage.getItem(`test-result-${id}`);
-      if (stored) {
-        try { setResult(JSON.parse(stored)); } catch { /* */ }
+    async function load() {
+      // Try sessionStorage first
+      const cached = sessionStorage.getItem(`test-result-${id}`);
+      if (cached) {
+        try {
+          setResult(JSON.parse(cached));
+          setLoading(false);
+          return;
+        } catch { /* fall through */ }
       }
+
+      // Try Supabase
+      try {
+        const { getSupabase } = await import('@/lib/supabaseClient');
+        const db = getSupabase();
+        if (db && id) {
+          const { data } = await db.from('test_sessions').select('*').eq('id', id).single();
+          if (data) {
+            const full: FullResult = {
+              ...data.initial_result_json,
+              dashboardScores: data.dashboard_scores_json,
+              constraintScores: data.constraint_scores_json,
+            };
+            setResult(full);
+            setLoading(false);
+            return;
+          }
+        }
+      } catch { /* ignore */ }
+
+      setLoading(false);
     }
-    setLoading(false);
+    load();
   }, [id]);
 
   if (loading) {
@@ -43,12 +75,10 @@ function ResultContent() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      {/* 1. Status Card */}
+      {/* 1. Status */}
       <div className="text-center mb-3">
         <p className="text-xs text-gray-400 mb-3">你的当前行动状态</p>
-        <span className="inline-block rounded-full bg-[#ebf4ff] px-5 py-2 text-base font-bold text-[#1a365d]">
-          {result.title}
-        </span>
+        <span className="inline-block rounded-full bg-[#ebf4ff] px-5 py-2 text-base font-bold text-[#1a365d]">{result.title}</span>
       </div>
       <div className="rounded-xl border border-[#1a365d]/15 bg-[#1a365d]/5 p-5 mb-10">
         <div className="flex items-start gap-2">
@@ -58,16 +88,20 @@ function ResultContent() {
       </div>
 
       {/* 2. Dashboard */}
-      <div className="rounded-xl border border-gray-200 bg-white p-6 mb-8">
-        <h2 className="text-sm font-semibold text-[#1a365d] mb-5">行动制约仪表盘</h2>
-        <ActionDashboard scores={result.dashboardScores} />
-      </div>
+      {result.dashboardScores && (
+        <div className="rounded-xl border border-gray-200 bg-white p-6 mb-8">
+          <h2 className="text-sm font-semibold text-[#1a365d] mb-5">行动制约仪表盘</h2>
+          <ActionDashboard scores={result.dashboardScores} />
+        </div>
+      )}
 
       {/* 3. Top 3 Constraints */}
-      <div className="rounded-xl border border-gray-200 bg-white p-6 mb-8">
-        <h2 className="text-sm font-semibold text-[#1a365d] mb-5">当前最主要的制约因素</h2>
-        <TopConstraintList scores={result.constraintScores} />
-      </div>
+      {result.constraintScores && (
+        <div className="rounded-xl border border-gray-200 bg-white p-6 mb-8">
+          <h2 className="text-sm font-semibold text-[#1a365d] mb-5">当前最主要的制约因素</h2>
+          <TopConstraintList scores={result.constraintScores} />
+        </div>
+      )}
 
       {/* 4. Not Recommended */}
       <div className="rounded-xl border border-amber-200 bg-amber-50 p-6 mb-8">
@@ -105,10 +139,14 @@ function ResultContent() {
         </div>
       </div>
 
+      {/* 7. Feedback */}
+      <div className="mt-14">
+        <div className="h-px bg-gray-200 mb-8" />
+        <FeedbackForm testSessionId={id} resultType={result.resultType} />
+      </div>
+
       <div className="mt-10 text-center">
-        <Link href="/test" className="inline-block rounded-md border border-gray-300 px-6 py-3 text-sm font-medium text-gray-600 hover:border-[#1a365d] hover:text-[#1a365d] transition-colors">
-          重新测试
-        </Link>
+        <Link href="/test" className="inline-block rounded-md border border-gray-300 px-6 py-3 text-sm font-medium text-gray-600 hover:border-[#1a365d] hover:text-[#1a365d] transition-colors">重新测试</Link>
       </div>
     </div>
   );
