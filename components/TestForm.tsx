@@ -51,7 +51,7 @@ export default function TestForm() {
     setSubmitting(true);
 
     const result = generateInitialResult(answers, optionalText);
-    const id = crypto.randomUUID();
+    const id = Math.random().toString(36).substring(2) + Date.now().toString(36);
 
     sessionStorage.setItem(`test-result-${id}`, JSON.stringify(result));
     router.push(`/result?id=${id}`);
