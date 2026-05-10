@@ -63,7 +63,7 @@ export default function FeedbackForm({ testSessionId, resultType }: { testSessio
 
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-6">
-      <h3 className="text-sm font-semibold text-[#1a365d]">结果校准</h3>
+      <h3 className="text-sm font-semibold text-[#1a365d]">意见反馈</h3>
       <p className="text-xs text-gray-400 mt-1 mb-6">你的反馈将用于改进后续版本。</p>
 
       <div className="space-y-5">
