@@ -69,10 +69,8 @@ export default function TestForm() {
           constraint_scores_json: constraintScores,
         });
         if (dbErr) {
-          alert('Supabase error: ' + dbErr.message);
+          console.error('Supabase error:', dbErr.message);
         }
-      } else {
-        alert('Supabase not connected');
       }
 
       router.push(`/result?id=${id}`);
