@@ -60,7 +60,6 @@ export default function TestForm() {
       const db = getSupabase();
       if (db) {
         db.from('test_sessions').insert({
-          id,
           user_id: null,
           answers_json: answers,
           optional_text: optionalText,
